@@ -3,14 +3,14 @@
 #include<stdlib.h>
 #include<string.h>
 #define N 10
-void quicksort(int q[],int left,int right)
+void quicksort(int *q,int left,int right)
 {
     int i,j,t,k,temp;
     if(left>right)
         return ;
 
     i = left; j = right;
-    //temp = q[left];
+    //temp = q[left];///直接确定基准位置
     k=rand()%(right-left+1)+left;///随机确定基准位置
     temp = q[k];
     q[k] = q[i];
