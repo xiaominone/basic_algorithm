@@ -17,6 +17,8 @@
 ///用indegree[n]存放节点的度
 ///toposort[n]存放拓扑顺序
 
+*/
+
 void topologic(int* toposort)
 {
     int cnt=0; ///记录当前的拓扑序列中的节点个数

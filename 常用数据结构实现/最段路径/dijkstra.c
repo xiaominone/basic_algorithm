@@ -25,7 +25,7 @@ int calc(int G[N][N])
     pathN[0]=1;
 
     queue<int>q;
-    q.push(0);
+    q.push(0);///节点序号入队
     int from,i,s;///开始节点from
     while(!q.empty())
     {
