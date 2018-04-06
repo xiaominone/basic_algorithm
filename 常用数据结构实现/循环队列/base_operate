@@ -1,0 +1,9 @@
+循环队列基本条件:
+初始化：Q.front = Q.rear = 0;
+进队：Q.front = (Q.front+1)%MaxSize
+出队：Q.rear = (Q.rear+1)%MaxSize
+队空：	Q.front == Q.rear
+队满：(Q.rear+1)%Maxsize = Q.front 
+队列长度：(Q.rear + MaxSize - Q.front)%MaxSize
+
+
