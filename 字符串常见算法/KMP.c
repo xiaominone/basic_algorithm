@@ -52,17 +52,48 @@ void get_next(const char* p,int next[])
 {
     int nlen = (int)strlen(p);
     next[0] = -1;
+    int k = -1;///k就是next[j-1]
+    int j = 0;
+    while(j < nlen-1)
+    {
+        if(k ==-1 || p[j]==p[k])//k就是next[j-1]  p[k]表示前缀　　p[j]表示后缀
+
+        {
+            ++j;
+            next[j] = k++;
+        }
+        else///p[j]　p[k]匹配失败　递归求前缀p[next[k]]
+        {
+            k = next[k];
+        }
+    }
+}
+
+///变种的ＫＭＰ
+void get_next2(const char* p,int next[])
+{
+    int nlen = (int)strlen(p);
+    next[0] = -1;
     int k = -1;
     int j = 0;
     while(j < nlen-1)
     {
-        if(k ==-1 || p[j]==p[k])
+        if(k ==-1 || p[j]==p[k])//k就是next[j-1]  p[k]表示前缀　　p[j]表示后缀
+
         {
-            ++k;
             ++j;
-            next[j] = k;
+            ++k;
+            if(p[j]==p[k])
+            {
+                next[j] = next[k];///变种之后　表示p[j] p[k]都匹配失败　直接让next[j]变成next[k]
+            }
+            else
+            {
+                next[j] = k;
+            }
+
         }
-        else
+        else///p[j]　p[k]匹配失败　递归求前缀p[next[k]]
         {
             k = next[k];
         }
@@ -94,8 +125,27 @@ int kmp(int n)
     return ans;
 }
 
+/*分析：
+经典的ＫＭＰ：
+最好情况:当模式串的首字符和其他字符都不相等时,模式串不存在相等的k前缀和k后缀,next数组全为-1　一旦匹配失效,模式串直接跳过已经比较的字符。比较次数为N
+最差情况:当模式串的首字符和其他字符全都相等时,模式串存在最长的k前缀和k后缀,next数组呈现递增样式:-1,0,1,2...
+
+变种kmp:
+最好情况：当模式串的首字符和其他字符全都相等时，next数组全为-1
+
+*/
+
+/*案例：给定一个长度为n的字符串S,如果存在一个字符串T,重复若干次T能够得到S,那么,S叫做周期串,T叫做S的一个周期。 如:字符串abababab是周期串,abab、ab都
+是它的周期,其中,ab是它的最小周期。 设计一个算法,计算S的最小周期。如果S不存在周期,返回空串。
 
 
+
+使用next,线性时间解决问题
+
+
+
+计算S的next数组;记k=next[len],p=len-k;　若len%p==0,则p为最小周期长度,前p个字符就是最小周期
+*/
 
 
 
