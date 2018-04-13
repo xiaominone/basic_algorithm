@@ -2,6 +2,8 @@
 已知数组A[0...N-1],给定某数值sum,找出数组中的若干个数,使得这些数的和为sum。
 
 */
+
+///布尔向量x[0...N-1] x[i]=0表示不取A[i], x[i]=1表示取A[i]
 //1.直接递归法(枚举)
 //2.分支限界
 //3.存在负数的处理办法
@@ -67,7 +69,7 @@ void finnumber(bool* x,int i,int has,int residue)
     if(has+residue-a[i]>=sum)//可以取０
     {
         x[i] = false;
-        finnumber(x,i+1,has,residue-a[i]);
+        finnumber(x,i+1,has,residue-a[i]);ŝ
     }
 
 }
@@ -77,7 +79,47 @@ void finnumber(bool* x,int i,int has,int residue)
 1.如果A[i]为负数:如果全部正数都算上还不够,就不能选A[i];
 2.如果递归进入了正数范围,按照数组是全正数的情况正常处理
 */
-
+void findnumber(bool* x,int i,int has,int negative;int positive)
+{
+    if(x>size)
+    {
+        return;
+    }
+    if(has+x[i] == sum)
+    {
+        x[i]  = true;
+        print(x);
+        x[i] = false;
+    }
+    if(a[i]>0)
+    {
+        if((has+positive>=sum)&&(has+a[i]<=sum))///可以取a[i]
+        {
+            x[i] = true;
+            finnumber(x,i+1,has+a[i],negative,positive-a[i]);
+            x[i] = false;
+        }
+        if(has+residue-a[i]>=sum)//可以取０
+        {
+            x[i] = false;
+            finnumber(x,i+1,has,negative,positive-a[i]);
+        }
+    }
+    else
+    {
+        if(has+a[i]+positive>=sum)
+        {
+            x[i]  = true;
+            finnumber(x,i+1,has+a[i],negative-a[i],positive);
+            x[i]  = false;
+        }
+        if((has+negative<=sum)&&(has+positive>=sum))
+        {
+            x[i]  = false;
+            finnumber(x,i+1,has,negative-a[i],positive);
+        }
+    }
+}
 
 
 
