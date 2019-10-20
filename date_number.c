@@ -1,4 +1,4 @@
-///统计某一天是某年的第几天
+//统计某一天是某年的第几天
 #include<stdio.h>
 typedef struct
 {
